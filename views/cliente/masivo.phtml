@@ -1,0 +1,60 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#">
+				<em class="fa fa-home"></em>
+			</a></li>
+			<li class="active"><?php echo $this->controlador ?> / <?php echo $this->miga ?></li>
+		</ol>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header"><?php echo $this->controlador ?></h1>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"><?php echo $this->miga ?></div>
+		<div class="panel-body btn-margins">
+			<div class="col-md-12">
+				<form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="guardar" value="1">
+					<div id="alert"></div>
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Mensaje: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+		                	<textarea name="mensaje" class="form-control required" rows="6"></textarea>
+		                </div>
+		           	</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Fecha Inicio: <span class="span">*</span></label>
+						<div class="col-xs-12 col-sm-9 col-lg-9">
+							<div class='input-group date datetimepicker'>
+			                    <input type='text' class="form-control" required name="fecha" value="" />
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+						
+						</div>
+					</div>
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Tipos Mensajes: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+		                	<?php foreach ($this->tiposMensajes as $key => $value) { ?>
+		                	<div class="col-sm-4">
+			             		<label class="checkbox-inline"><input type="checkbox" name="tipoMensaje[]" value="<?php echo $value->getId() ?>"><?php echo $value->getDescripcion() ?></label>
+		                	</div>
+			             	<?php } ?>
+		                </div>
+		           	</div>
+					<p class="text-right comentario">
+						Los campos marcados con <span class="span">*</span> son obligatorios.
+					</p>
+					<button type="submit" class="btn btn-primary" >Agregar </button> 
+					<a class="btn btn-primary" href="<?php echo BASE_URL.$this->_presentRequest->getControlador().'/'; ?>">Listado</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

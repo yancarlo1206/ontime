@@ -1,0 +1,115 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#">
+				<em class="fa fa-home"></em>
+			</a></li>
+			<li class="active"><?php echo $this->controlador ?> / <?php echo $this->miga ?></li>
+		</ol>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header"><?php echo $this->controlador ?></h1>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"><?php echo $this->miga ?></div>
+		<div class="panel-body btn-margins">
+			<div class="col-md-12">
+				<form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+					<div id="alert"></div>
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Cliente: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			            <?php $cliente = ''; ?>
+						<?php if(isset($this->dato)){ $cliente = $this->dato->getCliente()->getId(); } ?>
+						<?php echo $this->combobox("cliente", "Seleccione...", $this->clientes, $cliente, "getId", "getNombre", "class='form-control show-tick required' data-live-search='true'","getNombre"); ?>
+		                </div>
+		           	</div>
+		           	<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Medicamento: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			            <?php $medicamento = ''; ?>
+						<?php if(isset($this->dato)){ $medicamento = $this->dato->getMedicamento()->getId(); } ?>
+						<?php echo $this->combobox("medicamento", "Seleccione...", $this->medicamentos, $medicamento, "getId", "getNombre", "class='form-control show-tick required' id='selectMedicamento' data-live-search='true'","getNombre"); ?>
+		                </div>
+		           	</div>
+		           	<div class="form-group">
+					    <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Cantidad: <span class="span">*</span></label>
+					    <div class="col-xs-12 col-sm-9 col-lg-9">
+					    	<div class="input-group">
+					      		<span class="input-group-addon">
+					        		<input type="checkbox" aria-label="..." id="checkCantidad">
+					      		</span>
+					      		<input name="cantidad" type="text" class="form-control required" aria-label="..." readonly id="inputCantidad">
+					      	</div>
+					    </div>
+					</div>
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Dosis: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <input name="dosis" class="form-control integer required" value="<?php if(isset($this->dato)){ echo $this->dato->getDosis();} ?>" />
+		                </div>
+		           	</div>
+		           	<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Fecha Inicio: <span class="span">*</span></label>
+						<div class="col-xs-12 col-sm-9 col-lg-9">
+							<div class='input-group date datetimepicker'>
+			                    <input type='text' class="form-control" name="fechainicio" value="<?php if(isset($this->dato)){ if($this->dato->getFechaInicio()) { echo $this->dato->getFechaInicio()->format('d/m/Y h:i');} } ?>" />
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+						
+						</div>
+					</div>
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Frecuencia: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			            <?php $frecuencia = ''; ?>
+						<?php if(isset($this->dato)){ $frecuencia = $this->dato->getFrecuencia()->getId(); } ?>
+						<?php echo $this->combobox("frecuencia", "Seleccione...", $this->frecuencias, $frecuencia, "getId", "getDescripcion", "class='form-control show-tick required' data-live-search='true'","getDescripcion"); ?>
+		                </div>
+		           	</div>
+					
+		           	<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Tipos Mensajes: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+		                	<?php foreach ($this->tiposMensajes as $key => $value) { ?>
+		                	<div class="col-sm-4">
+			             		<label class="checkbox-inline"><input type="checkbox" name="tipoMensaje[]" value="<?php echo $value->getId() ?>"><?php echo $value->getDescripcion() ?></label>
+		                	</div>
+			             	<?php } ?>
+		                </div>
+		           	</div>
+					
+					<p class="text-right comentario">
+						Los campos marcados con <span class="span">*</span> son obligatorios.
+					</p>
+					<button type="submit" class="btn btn-primary" ><?php echo ucwords($this->_presentRequest->getMetodo()); ?> </button> 
+					<a class="btn btn-primary" href="<?php echo BASE_URL.$this->_presentRequest->getControlador().'/'; ?>">Listado</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$("#selectMedicamento").change(function(event) {
+			$.post(BASE.url + 'dosificacion/cargarMedicamento/', {medicamento:$("#selectMedicamento").val()}, function(data, textStatus, xhr) {
+				$("#inputCantidad").val(data);
+			});
+		});
+
+		$("#checkCantidad").click(function(event) {
+			if($("#checkCantidad").is(':checked')) {
+ 	   			$("#inputCantidad").removeAttr("readonly");
+			}else{
+				$("#inputCantidad").attr('readonly','readonly');
+			}
+		});
+
+	});
+</script>

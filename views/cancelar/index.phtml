@@ -1,0 +1,27 @@
+<div class="col-sm-12 col-lg-12 main">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Cancelaci&oacute;n</h1>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"></div>
+		<div class="panel-body btn-margins">
+			<div class="col-md-12">
+				<form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+					<div id="alert"></div>
+					<input type="hidden" name="registrar" value="1">
+					<input type="hidden" name="mensaje" value="<?php echo $this->mensaje ?>">
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >C&oacute;digo: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <input name="codigo" class="form-control required integer" maxlength="6" />
+		                </div>
+		           	</div>
+					<button type="submit" class="btn btn-primary" >Registrar</button> 
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

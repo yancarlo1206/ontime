@@ -1,0 +1,165 @@
+
+<div class="panel panel-primary">
+	  <div class="panel-heading">
+			<h3 class="panel-title"><?php echo ucwords(strtolower($this->_presentRequest->getMetodo())); ?></h3>
+	  </div>
+	  <div class="panel-body">
+
+	    <form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+	    	<input type="hidden" name="guardar" value="1" />
+
+	    	<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Placa: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input type="hidden" name="vehiculo" value="<?php if(isset($this->vehiculo)){ echo $this->vehiculo->getId();} ?>"/>
+					<input name="placa" class="form-control required" value="<?php if(isset($this->vehiculo)){ echo $this->vehiculo->getPlaca();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Tipo: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<select name="tipo" class="form-control" required id="comboTipo">
+                        <option value="">Seleccione... </option>
+                        <option value="1" <?php if(isset($this->dato)){ echo $this->dato->getTipo() == 1 ? 'selected' : ''; } ?> >Preventivo</option>
+                        <option value="2" <?php if(isset($this->dato)){ echo $this->dato->getTipo() == 2 ? 'selected' : ''; } ?> >Correctivo</option>
+                    </select>
+				</div>
+			</div>
+
+			<div id="divFrecuencia" style="display:none">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Frecuencia: </label>
+					<div class="col-xs-12 col-sm-9 col-lg-9">
+						<?php $frecuencia = ''; ?>
+						<?php if(isset($this->dato)){ $frecuencia = $this->dato->getFrecuencia()->getId(); } ?>
+						<?php echo $this->combobox("frecuencia", "Seleccione...", $this->frecuencias, $frecuencia, "getId", "getDescripcion", "class='form-control show-tick' data-live-search='true' id='comboFrecuencia'","getDescripcion"); ?>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Fecha: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="fecha" class="form-control datepicker" data-date-format="dd/mm/yyyy" placeholder="dd/mm/aaaa" value="<?php if(isset($this->dato)){ if($this->dato->getFecha()) { echo $this->dato->getFecha()->format('d/m/Y');} } ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Conductor: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="conductor" class="form-control required" value="<?php if(isset($this->dato)){ echo $this->dato->getConductor();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Revisor: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="revisor" class="form-control required" value="<?php if(isset($this->dato)){ echo $this->dato->getRevisor();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Observaci&oacute;n: </label>
+                <div class="col-xs-12 col-sm-9 col-lg-9">
+	                <textarea name="observacion"  class="form-control funciones"  maxlength="400" rows = "4"><?php if(isset($this->dato)){ echo $this->dato->getObservacion();} ?></textarea>
+                </div>
+           	</div>	
+
+           	<div id="divCorrectivo" style="display:none;">
+				<div class="form-group">
+	                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Falla: </label>
+	                <div class="col-xs-12 col-sm-9 col-lg-9">
+	                	<textarea name="falla"  class="form-control funciones"  maxlength="400" rows = "4"><?php if(isset($this->dato)){ echo $this->dato->getFalla();} ?></textarea>
+	                </div>
+	            </div>	
+
+				<div class="form-group">
+	               	<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Reparaci&oacute;n: </label>
+	                <div class="col-xs-12 col-sm-9 col-lg-9">
+	                	<textarea name="reparacion"  class="form-control funciones"  maxlength="400" rows = "4"><?php if(isset($this->dato)){ echo $this->dato->getReparacion();} ?></textarea>
+	                </div>
+	            </div>	
+            </div>
+
+            <div id="divPreventivo" style="display:none;">
+	            <div class="form-group">
+		            <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Seleccionar: </label>
+		            <div class="col-xs-12 col-sm-9 col-lg-9">
+			            <table class="table table-striped table-bordered table-hover" >
+							<thead>
+								<tr>
+									<th>Item</th>
+									<th class="no-sort" >Aceptable</th>
+									<th class="no-sort" >No Aceptable</th>
+								</tr>
+							</thead>
+							<tbody id="tablaItem">
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<p class="text-right comentario">
+				Los campos marcados con <span class="span">*</span> son obligatorios.
+			</p>
+
+			<button type="submit" class="btn btn-primary" ><?php echo ucwords($this->_presentRequest->getMetodo()); ?> </button> 
+			
+
+		</form>
+
+	  </div>
+</div>
+
+<div class="panel panel-primary">
+	  <div class="panel-heading">
+			<h3 class="panel-title">Items</h3>
+	  </div>
+	  <div class="panel-body">
+
+	    <form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+			
+			
+		</form>
+
+	  </div>
+</div>
+
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+
+		$('.datepicker').datepicker().on('changeDate', function() {
+        	$(this).datepicker('hide');
+    	});
+
+		$("#comboTipo").change(function(event) {
+			if($("#comboTipo").val() == '1'){
+				$("#divFrecuencia").css('display','block');
+				$("#divPreventivo").css('display','block');
+				$("#divCorrectivo").css('display','none');
+			}else{
+				$("#divFrecuencia").css('display','none');
+				$("#divPreventivo").css('display','none');
+				$("#divCorrectivo").css('display','block');
+			}
+		});
+
+		$("#comboFrecuencia").change(function(event) {
+			var frecuencia = $("#comboFrecuencia").val();
+			var columna = "";
+			$.post(BASE.url+"mantenimiento/cargarItem/", {frecuencia:frecuencia}, function(data) {
+				$.each(data.datos, function(index, val) {
+					columna += "<tr><td>"+val.descripcion+"</td><td><input type='radio' name='radio"+val.id+"' group='radio"+val.id+"' class='radio' value='1' /></td>";
+					columna += "<td><input type='radio' name='radio"+val.id+"' group='radio"+val.id+"' class='radio' value='0' /></td></tr>";
+				});
+				$("#tablaItem").html(columna);
+			},"json");	
+		});
+
+	});
+</script>

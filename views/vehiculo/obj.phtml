@@ -1,0 +1,317 @@
+<div class="panel panel-primary">
+	  <div class="panel-heading">
+			<h3 class="panel-title"><?php echo ucwords(strtolower($this->_presentRequest->getMetodo())); ?></h3>
+	  </div>
+	  <div class="panel-body">
+
+	    <form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+	    	<div class="form-group required">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Placa: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="placa" class="form-control required" value="<?php if(isset($this->dato)){ echo $this->dato->getPlaca();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Marca: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<?php $marca = ''; ?>
+					<?php if(isset($this->dato)){ $marca = $this->dato->getMarca()->getId(); } ?>
+					<?php echo $this->combobox("marca", "Seleccione...", $this->marcas, $marca, "getId", "getDescripcion", "class='form-control show-tick' data-live-search='true' ","getDescripcion"); ?>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Tipo: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<?php $tipo = ''; ?>
+					<?php if(isset($this->dato)){ $tipo = $this->dato->getTipo()->getId(); } ?>
+					<?php echo $this->combobox("tipo", "Seleccione...", $this->tipos, $tipo, "getId", "getDescripcion", "class='form-control show-tick' data-live-search='true' ","getDescripcion"); ?>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Tipo Combustible: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<?php $tipocombustible = ''; ?>
+					<?php if(isset($this->dato)){ if ($this->dato->getCombustible()) $tipocombustible = $this->dato->getCombustible()->getId(); } ?>
+					<?php echo $this->combobox("tipocombustible", "Seleccione...", $this->tipocombustibles, $tipocombustible, "getId", "getDescripcion", "class='form-control show-tick' data-live-search='true' ","getDescripcion"); ?>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Radio de Acción: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<?php $radio = ''; ?>
+					<?php if(isset($this->dato)){ $radio = $this->dato->getRadio()->getId(); } ?>
+					<?php echo $this->combobox("radio", "Seleccione...", $this->radios, $radio, "getId", "getDescripcion", "class='form-control show-tick' data-live-search='true' ","getDescripcion"); ?>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Num Motor: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="nummotor" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getNummotor();} ?>" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Linea: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="linea" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getLinea();} ?>" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Num Chasis: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="numchasis" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getNumchasis();} ?>" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Carroceria: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="tipocarroceria" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getTipocarroceria();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Cilindraje: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="cilindraje" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getCilindraje();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Modelo: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="modelo" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getModelo();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Capacidad: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="capacidad" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getCapacidad();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Area: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="area" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getArea();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Servicio: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="servicio" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getServicio();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Numero Puertas: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="numpuertas" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getNumpuertas();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Numero Licencia: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="numlicencia" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getNumlicencia();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Numero Tarjeta Operacional: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="numtarjoperacional" class="form-control" value="<?php if(isset($this->dato)){ echo $this->dato->getNumtarjoperacional();} ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Fecha Venc Tarjeta Operacional: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="fecvenctarjoperacional" class="form-control datepicker" data-date-format="dd/mm/yyyy" placeholder="dd/mm/aaaa" value="<?php if(isset($this->dato)){ if($this->dato->getFecvenctarjoperacional()) { echo $this->dato->getFecvenctarjoperacional()->format('d/m/Y');} } ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Fecha Venc Tecnomecanico: </label>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<input name="fecvenctecnomecanico" class="form-control datepicker" data-date-format="dd/mm/yyyy" placeholder="dd/mm/aaaa" value="<?php if(isset($this->dato)){ if($this->dato->getFecvenctecnomecanico()) { echo $this->dato->getFecvenctecnomecanico()->format('d/m/Y');} } ?>" />
+				</div>
+			</div>
+
+			<div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Observaci&oacute;n: </label>
+                    <div class="col-xs-12 col-sm-9 col-lg-9">
+                    	<textarea name="observacion"  class="form-control funciones"  maxlength="400" rows = "4">
+                    		<?php if(isset($this->dato)){ echo $this->dato->getObservacion();} ?>
+                    	</textarea>
+                    </div>
+            </div>
+
+            <p class="text-right comentario">
+				Los campos marcados con <span class="span">*</span> son obligatorios.
+			</p>
+
+			<button type="submit" class="btn btn-primary" ><?php echo ucwords($this->_presentRequest->getMetodo()); ?> </button> 
+			<a class="btn btn-primary" href="<?php echo BASE_URL.$this->_presentRequest->getControlador().'/'; ?>">Listado</a>
+
+		</form>
+
+	  </div>
+</div>
+<?php if($this->metodo == "editar"){ ?>
+<div class="panel panel-primary">
+	  <div class="panel-heading">
+			<h3 class="panel-title">Imagenes</h3>
+	  </div>
+	  <div class="panel-body">
+            <form role="form" class="row" method="post" action="" enctype="multipart/form-data" id="formImagen">
+	            <input type="hidden" name="id" value="<?php echo $this->dato->getId() ?>" />
+	            <div class="form-group col-xs-6">
+	                <label>Seleccione Archivo: </label> 
+	                <input type="file" name="imagen" class="form-control" />
+	            </div>
+	            <div class="form-group col-xs-6">
+	                <label>Imagen: </label> 
+	                <select name="tipoImagen" class="form-control">
+	                	<option value="">Seleccione...</option>
+	                	<option value="1">Imagen 1</option>
+	                	<option value="2">Imagen 2</option>
+	                </select>
+	            </div>
+	            <div class="form-group col-xs-12">
+	                <a class="btn btn-primary btn-sm btn-block" id="subirImagen">Subir Imagen</a>
+	            </div>
+	            <?php if(!$this->dato->getImagen1() && !$this->dato->getImagen2()){ ?>
+	            <div class="form-group col-xs-12">
+	            	<div class="alert alert-warning">El ve&iacute;iculo no tiene imagenes registradas...</div>
+	            </div>
+	            <?php } ?>
+
+	            <div id="divImagenes">
+		            <?php if($this->dato->getImagen1()){ ?>
+		            	<div class="form-group col-xs-12 col-sm-6 col-lg-6">
+		            		<label>Imagen 1 </label> 
+		            		<img src="<?php echo BASE_URL."public/img/vehiculos/".$this->dato->getPlaca()."_1.".$this->dato->getImagen1() ?>" class="img-responsive" alt="Image">
+		            		<a class="btn btn-danger btn-sm eliminarImagen" id="<?php echo $this->dato->getId() ?>" imagen="1">Eliminar Imagen</a>
+		            	</div>
+		            <?php } ?>
+		            <?php if($this->dato->getImagen2()){ ?>
+		            	<div class="form-group col-xs-12 col-sm-6 col-lg-6">
+		            		<label>Imagen 2 </label> 
+		            		<img src="<?php echo BASE_URL."public/img/vehiculos/".$this->dato->getPlaca()."_2.".$this->dato->getImagen2() ?>" class="img-responsive" alt="Image">
+		            		<a class="btn btn-danger btn-sm eliminarImagen" id="<?php echo $this->dato->getId() ?>" imagen="2">Eliminar Imagen</a>
+		            	</div>
+		            <?php } ?>
+	            </div>
+        	</form>
+       </div>
+</div>
+<?php } ?>
+
+<?php if(isset($this->dato) && count($this->dato)){ ?>
+
+<div class="panel panel-primary">
+	  <div class="panel-heading">
+			<h3 class="panel-title">Mantenimientos</h3>
+	  </div>
+	  <div class="panel-body">
+
+	    <form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+			<table class="table table-striped table-bordered table-hover" id="dataTablesAdvanced">
+				<thead>
+					<tr>
+						
+						<th>Fecha</th>
+						<th>Tipo</th>
+						<th>Frecuencia</th>
+						<th>Observacion</th>
+						<th class="no-sort" >Accion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($this->dato->getMantenimientos() as $key => $dato) { ?>
+						<tr>
+							
+							<td><?php echo $dato->getFecha()->format('d/m/Y'); ?></td>
+							<td><?php echo $dato->getTipo() != 1 ?  "Correctivo" : "Preventivo" ;?></td>
+							<td><?php echo $dato->getFrecuencia()->getDescripcion(); ?></td>
+							<td>&nbsp;</td>
+							<td class="text-center">
+								<a title="Asignar" class="asignarV" vacuna="<?php echo $dato->getId(); ?>" ><i class="fa fa-calendar"></i></a>
+								<!--<a title="Eliminar" href="<?php echo BASE_URL.$this->_presentRequest->getControlador().'/'; ?>desactivarVacuna/<?php echo $vehiculo; ?>/<?php echo $dato->getId(); ?>/"><i class="fa fa-times"></i></a>-->
+							</td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+			<a class="btn btn-primary" id="mantenimiento" href="<?php echo BASE_URL.'mantenimiento/agregar/'.$this->dato->getId().'/'; ?>">Registrar Mantenimiento</a>
+		</form>
+
+	  </div>
+</div>
+
+<?php } ?>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		
+		$("#subirImagen").click(function(event) {
+        if($("#formImagen input[name='imagen']").val() == '' || $("#formImagen select[name='tipoImagen']").val() == ''){
+            //jError("Los Campos son Obligatorios","Error");
+            alert("Los Campos son Obligatorios");
+            return;
+        }
+        var formData = new FormData($("#formImagen")[0]);
+        var url = BASE.url + 'vehiculo/subirImagen/';
+        var columna = '';
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: url,
+            data: formData, 
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if(response.error && response.error != ""){
+                    alert(response.error);
+                    //jError(response.error,"Error");
+                }else{
+                	$("#formImagen input[name='imagen']").val("");
+                	$("#formImagen select[name='tipoImagen']").selectpicker('deselectAll');
+
+                	if(response.imagen1){
+                		columna += "<div class='form-group col-xs-12 col-sm-6 col-lg-6'><label>Imagen 1</label><img src='"+BASE.url+"public/img/vehiculos/"+response.placa+"_1."+response.imagen1+"'class='img-responsive' alt='Image'><a class='btn btn-danger btn-sm eliminarImagen' id='"+response.id+"' imagen='1'>Eliminar Imagen</a></div>";
+                	}
+
+                	if(response.imagen2){
+                		columna += "<div class='form-group col-xs-12 col-sm-6 col-lg-6'><label>Imagen 2</label><img src='"+BASE.url+"public/img/vehiculos/"+response.placa+"_2."+response.imagen2+"'class='img-responsive' alt='Image'><a class='btn btn-danger btn-sm eliminarImagen' id='"+response.id+"' imagen='2'>Eliminar Imagen</a></div>"
+                	}
+	            	
+                	$("#divImagenes").html(columna);
+
+                }
+            }
+        });
+    });
+    ///ELIMINAR ARCHIVOS///
+    $(".panel-body").delegate('.eliminarImagen', 'click', function(event) {
+        var columna = "";
+        var id = $(this).attr('id');
+        var imagen = $(this).attr('imagen');
+        $.post(BASE.url + 'vehiculo/eliminarImagen/', {id:id, imagen:imagen}, function(response) {
+                location.reload();
+        },"json");
+    });
+    ///////////////////////
+	});
+</script>

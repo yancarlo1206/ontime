@@ -1,0 +1,75 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#">
+				<em class="fa fa-home"></em>
+			</a></li>
+			<li class="active"><?php echo $this->controlador ?> / <?php echo $this->miga ?></li>
+		</ol>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header"><?php echo $this->controlador ?></h1>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"><?php echo $this->miga ?></div>
+		<div class="panel-body btn-margins">
+			<div class="col-md-12">
+				<form role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+					<div id="alert"></div>
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Nombre: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <input name="nombre" class="form-control required" value="<?php if(isset($this->dato)){ echo $this->dato->getNombre();} ?>" />
+		                </div>
+		           	</div>
+		           	<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Presentaci&oacute;n: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <?php $presentacion = ''; ?>
+							<?php if(isset($this->dato)){ $presentacion = $this->dato->getPresentacion()->getId(); } ?>
+							<?php echo $this->combobox("presentacion", "Seleccione...", $this->presentaciones, $presentacion, "getId", "getNombre", "class='form-control show-tick required' data-live-search='true'","getNombre"); ?>
+		                </div>
+		           	</div>
+		           	<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Cantidad: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <input name="cantidad" class="form-control required integer" value="<?php if(isset($this->dato)){ echo $this->dato->getCantidad();} ?>" />
+		                </div>
+		           	</div>
+					<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Tipo: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <?php $tipo = ''; ?>
+							<?php if(isset($this->dato)){ $tipo = $this->dato->getTipoMedicamento()->getId(); } ?>
+							<?php echo $this->combobox("tipo", "Seleccione...", $this->tiposMedicamentos, $tipo, "getId", "getDescripcion", "class='form-control show-tick required' data-live-search='true'","getDescripcion"); ?>
+		                </div>
+		           	</div>
+		           	<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Laboratorio: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <?php $laboratorio = ''; ?>
+							<?php if(isset($this->dato)){ $laboratorio = $this->dato->getLaboratorio()->getId(); } ?>
+							<?php echo $this->combobox("laboratorio", "Seleccione...", $this->laboratorios, $laboratorio, "getId", "getNombre", "class='form-control show-tick required' data-live-search='true'","getNombre"); ?>
+		                </div>
+		           	</div>
+		           	<div class="form-group">
+		                <label class="col-xs-12 col-sm-3 col-lg-3 control-label" >Informaci&oacute;n Adicional: <span class="span">*</span></label>
+		                <div class="col-xs-12 col-sm-9 col-lg-9">
+			                <input name="infoAdicional" class="form-control required" value="<?php if(isset($this->dato)){ echo $this->dato->getInfoAdicional();} ?>" />
+		                </div>
+		           	</div>
+					<p class="text-right comentario">
+						Los campos marcados con <span class="span">*</span> son obligatorios.
+					</p>
+					<?php if(Session::accesoView('administrador')){ ?>
+					<button type="submit" class="btn btn-primary" ><?php echo ucwords($this->_presentRequest->getMetodo()); ?> </button> 
+					<?php } ?>
+					<a class="btn btn-primary" href="<?php echo BASE_URL.$this->_presentRequest->getControlador().'/'; ?>">Listado</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
